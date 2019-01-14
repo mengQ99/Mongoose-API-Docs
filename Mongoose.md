@@ -6,9 +6,10 @@
 `var mongoose = require('mongoose');`
 mongoose 模块的 exports 对象是此类的一个实例。大多数应用只会使用这一个实例。
 
-### Mongoose.prototype.Aggregate()
+### Mongoose.prototype.Aggregate()//TODO
 Mongoose Aggregate 构造函数 
-聚合方法，主要用于处理数据（平均值、求和等），返回计算得出的结果。
+
+聚合方法，主要用于处理数据（平均值、求和、分组和排序等），返回计算得出的结果。
 
 ### Mongoose.prototype.CastError()
 
