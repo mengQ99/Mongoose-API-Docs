@@ -30,10 +30,10 @@ Mongoose Aggregate 构造函数
 类型转换错误构造函数
 
 参数：
-- type<String>: 数据类型名称
-- value<any>: 转换失败的值
-- path<String>: 发生转换错误的路径
-- [reason]<Error>: 抛出的原始错误
+- type: 数据类型名称
+- value: 转换失败的值
+- path: 发生转换错误的路径
+- [reason]: 抛出的原始错误
 
 
 ### Mongoose.prototype.Collection()
