@@ -5,12 +5,16 @@
 
 ### Mongoose()
 构造函数 Mongoose
+
 `var mongoose = require('mongoose');`
+
 mongoose 模块的 exports 对象是此类的一个实例。大多数应用只会使用这一个实例。
 
 ### Mongoose.prototype.Mongoose()
 此方法可以创建另一个 Mongoose 实例。
+
 Example:
+
 `
 var mongoose = require('mongoose');
 var anotherMongoose = new mongoose.Mongoose();
