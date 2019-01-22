@@ -80,6 +80,10 @@ const User = mongoose.model('User', UserSchema)
 
 ### Mongoose.prototype.modelNames()
 调用此方法返回在此Mongoose实例上创建的模型名称数组。
+```javascript
+mongoose.model('User', new Schema({ name: String }))
+mongoose.modelNames() //['User']
+```
 ### Mongoose.prototype.SchemaType()
 基本数据类型构造函数
 ```javascript
