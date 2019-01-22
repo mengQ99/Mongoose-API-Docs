@@ -67,15 +67,16 @@ const User = mongoose.model('User', UserSchema)
 - schema?: 使用的模式
 - collection?: 集合名称，如果不传此参数，默认使用模型名称
 - skipInit?:布尔值，是否跳过模型初始化
+
 返回值：
 
 与name参数相关的模型。如果模型不存在，Mongoose将创建模型。
 
 此方法可用于定义模型或检索模型。
 
-1. 在mongoose实例上定义的模型可用于由同一个mongoose实例创建的所有连接。
-2. 如果使用两个相同名称但不同模式调用mongoose.model()，则会出现OverwriteModelError。
-3. 如果使用相同的名称和相同的模式调用mongoose.model()，将获得相同的模式。
+- 在mongoose实例上定义的模型可用于由同一个mongoose实例创建的所有连接。
+- 如果使用两个相同名称但不同模式调用mongoose.model()，则会出现OverwriteModelError。
+- 如果使用相同的名称和相同的模式调用mongoose.model()，将获得相同的模式。
 
 ### Mongoose.prototype.modelNames()
 调用此方法返回在此Mongoose实例上创建的模型名称数组。
@@ -89,6 +90,7 @@ schema.path('name') instanceof SchemaType; // true
 mongoose.Schema.Types的别名，用于向后兼容。
 ### Mongoose.prototype.Types
 各种 Mongoose 类型。
+
 Example:
 ```javascript
 var mongoose = require('mongoose');
