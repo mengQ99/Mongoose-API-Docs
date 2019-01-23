@@ -22,6 +22,53 @@ var mongoose = require('mongoose');
 var anotherMongoose = new mongoose.Mongoose();
 ```
 
+### Mongoose.prototype.Connection()
+mongoose 连接，一个 Connection 相当于一个数据库。
+### Mongoose.prototype.createConnection()
+创建一个 Connection 实例。每个 connection 实例映射到一个数据库。在分割多个数据库连接时，此方法很有用。
+
+Connection 是一个 thenable 对象，可以这样使用`await mongoose.createConnection()`
+参数：（传递的选项优先于连接字符串中包含的选项。）
+- uri: a mongodb:// URI
+- options: 传递给MongoDB驱动程序的connect()函数，除了下面解释的4个mongoose特定选项。
+  - options.user
+  - options.pass
+  - options.autoIndex=true: 设置为false可禁用与此连接关联的所有模型的自动索引创建。
+  - options.bufferCommands=true: 设置为false可禁用与此连接关联的所有模型上的缓冲。
+Example:
+```javascript
+var opts = { db: { native_parser: true }}
+db = mongoose.createConnection('mongodb://user:pass@localhost:port/database', opts);
+```
+### Mongoose.prototype.connect()
+打开默认的 mongoose 连接，如果连接成功返回一个 Promise。
+参数：
+- uri: mongodb连接地址
+- options
+  - options.dbName: 要使用的数据库的名称。如果未提供，默认使用连接字符串中的数据库名称。
+  - options.user
+  - options.pass
+  - options.autoIndex=true
+  - options.bufferCommands=true
+  - options.useCreateIndex=true
+  - options.useFindAndModify=true: 设置为false以使findOneAndUpdate()和findOneAndRemove()使用原生findOneAndUpdate()而不是findAndModify()。
+  - options.useNewUrlParser=false: 设置为 true,当uri连接中的 db 不存在时自动创建，否则会报错。
+- callback(Function
+
+### Mongoose.prototype.disconnect()
+### Mongoose.prototype.connection
+Mongoose 模块的默认连接。相当于`mongoose.connections[0]`
+Example:
+```javascript
+var mongoose = require('mongoose');
+mongoose.connect(...);
+mongoose.connection.on('error', cb);
+```
+### Mongoose.prototype.connections
+### Mongoose.prototype.STATES
+用户连接状态
+
+
 ### Mongoose.prototype.Aggregate()//TODO
 Mongoose Aggregate 构造函数 
 
@@ -115,24 +162,13 @@ const vehicleSchema = new Schema({ fuelLevel: mongoose.Decimal128 });
 用于在模式中声明 MongoDB ObjectIds 的数据类型。
 不要使用它来创建新的 ObjectId 实例，而是使用 mongoose.Types.ObjectId。
 
-### Mongoose.prototype.ObjectId
-用于在模式中声明 MongoDB ObjectIds 的数据类型。
-不要使用它来创建新的 ObjectId 实例，而是使用 mongoose.Types.ObjectId。
-
 ### Mongoose.prototype.Number
 数字数据类型。
 ```javascript
 const schema = new Schema({ num: mongoose.Number });
-// Equivalent to:
+// 等同于
 const schema = new Schema({ num: 'number' });
 ```
-### Mongoose.prototype.Connection()
-### Mongoose.prototype.disconnect()
-### Mongoose.prototype.connect()
-### Mongoose.prototype.connection
-### Mongoose.prototype.createConnection()
-### Mongoose.prototype.STATES
-用户连接状态
 
 
 ### Mongoose.prototype.Mixed
@@ -150,8 +186,6 @@ const schema = new Schema({ num: 'number' });
 
 
 ### Mongoose.prototype.get()
-
-
 
 
 ### Mongoose.prototype.mongo
