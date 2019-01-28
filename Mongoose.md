@@ -56,8 +56,18 @@ db = mongoose.createConnection('mongodb://user:pass@localhost:port/database', op
 - callback(Function
 
 ### Mongoose.prototype.disconnect()
+回调在所有连接关闭后或第一次发生错误时调用，会并行运行所有连接上的.close()。
+
+参数：
+
+- callback <Function>： 在所有连接关闭后或第一次发生错误时调用。
+返回值：
+
+返回一个Promise，在所有连接关闭时返回resolve状态，或在发生第一个错误返回reject状态。
+
 ### Mongoose.prototype.connection
 Mongoose 模块的默认连接。相当于`mongoose.connections[0]`
+
 Example:
 ```javascript
 var mongoose = require('mongoose');
@@ -65,18 +75,32 @@ mongoose.connect(...);
 mongoose.connection.on('error', cb);
 ```
 ### Mongoose.prototype.connections
+包含与此Mongoose实例关联的所有连接的数组。默认情况下，有1个连接。调用 createConnection() 会添加到此数组的连接。
+
+Example:
+```
+const mongoose = require('mongoose');
+mongoose.connections.length; // 1 只有默认连接
+mongoose.connections[0] === mongoose.connection; // true
+
+mongoose.createConnection('mongodb://localhost:27017/test');
+mongoose.connections.length; // 2 
+```
 ### Mongoose.prototype.STATES
 用户连接状态
 
+### Mongoose.prototype.mongo
+Mongoose使用的node-mongodb-native驱动程序。
+
 
 ### Mongoose.prototype.Aggregate()//TODO
-Mongoose Aggregate 构造函数 
+Mongoose Aggregate 类构造函数 
 
 聚合方法，主要用于处理数据（平均值、求和、分组和排序等），返回计算得出的结果。
 ### Mongoose.prototype.Error()
-错误构造函数
+错误类构造函数
 ### Mongoose.prototype.CastError()
-类型转换错误构造函数
+类型转换错误类构造函数
 
 参数：
 - type: 数据类型名称
@@ -99,6 +123,8 @@ const UserSchema = new Schema({
   age: Number
 })
 ```
+### Mongoose.prototype.Query()
+Mongoose 查询类构造函数。
 
 ### Mongoose.prototype.Model()
 
@@ -108,6 +134,21 @@ const UserSchema = new Schema({
 ```javascript
 const User = mongoose.model('User', UserSchema)
 ```
+
+### Mongoose.prototype.deleteModel()
+如果存在，移除默认连接中名为 `name` 的模型。你可以使用这个函数清除在测试中创建的任何模型，以防发生 OverwriteModelErrors 错误。
+
+等同于方法 `mongoose.connection.deleteModel(name)`。
+
+参数：
+- name：可以是字符串或者正则表达式。如果是字符串，则移除字符串指定名称的模型，如果使用正则表达式会删除所有名称匹配的模型。
+
+Example:
+```javascript
+mongoose.deleteModel('User');
+console.log(mongoose.model('User')); // undefined
+```
+
 ### Mongoose.prototype.model()
 参数：
 - name: 模型名称或类扩展模型
@@ -170,25 +211,20 @@ const schema = new Schema({ num: mongoose.Number });
 const schema = new Schema({ num: 'number' });
 ```
 
-
 ### Mongoose.prototype.Mixed
+
 ### Mongoose.prototype.DocumentProvider()
 
 ### Mongoose.prototype.Promise
 
 ### Mongoose.prototype.PromiseProvider()
 
-### Mongoose.prototype.Query()
+
 
 ### Mongoose.prototype.VirtualType()
 
-### Mongoose.prototype.deleteModel()
-
 
 ### Mongoose.prototype.get()
-
-
-### Mongoose.prototype.mongo
 
 ### Mongoose.prototype.mquery
 
