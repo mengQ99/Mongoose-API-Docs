@@ -31,10 +31,11 @@ Connection 是一个 thenable 对象，可以这样使用`await mongoose.createC
 参数：（传递的选项优先于连接字符串中包含的选项。）
 - uri: a mongodb:// URI
 - options: 传递给MongoDB驱动程序的connect()函数，除了下面解释的4个mongoose特定选项。
-  - options.user
-  - options.pass
+  - options.user: 用于身份认证的用户名
+  - options.pass: 用于身份认证的密码
   - options.autoIndex=true: 设置为false可禁用与此连接关联的所有模型的自动索引创建。
   - options.bufferCommands=true: 设置为false可禁用与此连接关联的所有模型上的缓冲。
+  
 Example:
 ```javascript
 var opts = { db: { native_parser: true }}
@@ -46,11 +47,11 @@ db = mongoose.createConnection('mongodb://user:pass@localhost:port/database', op
 - uri: mongodb连接地址
 - options
   - options.dbName: 要使用的数据库的名称。如果未提供，默认使用连接字符串中的数据库名称。
-  - options.user
-  - options.pass
-  - options.autoIndex=true
-  - options.bufferCommands=true
-  - options.useCreateIndex=true
+  - options.user: 用于身份认证的用户名
+  - options.pass: 用于身份认证的密码
+  - options.autoIndex=true: Mongoose 特定选项。设置为false可禁用与此连接关联的所有模型的自动索引创建。
+  - options.bufferCommands=true: Mongoose 特定选项。设置为false可禁用与此连接关联的所有模型上的缓冲。
+  - options.useCreateIndex=true: Mongoose 特定选项。如果为true，则此连接将使用createIndex()而不是ensureIndex()通过Model.init()进行自动索引构建。
   - options.useFindAndModify=true: 设置为false以使findOneAndUpdate()和findOneAndRemove()使用原生findOneAndUpdate()而不是findAndModify()。
   - options.useNewUrlParser=false: 设置为 true,当uri连接中的 db 不存在时自动创建，否则会报错。
 - callback(Function
@@ -212,31 +213,34 @@ const schema = new Schema({ num: 'number' });
 ```
 
 ### Mongoose.prototype.Mixed
-
-### Mongoose.prototype.DocumentProvider()
-
+Mixed SchemaType，混合类型，可以是任何类型。
+```javascript
+const schema = new Schema({ arbitrary: mongoose.Mixed });
+```
 ### Mongoose.prototype.Promise
-
 ### Mongoose.prototype.PromiseProvider()
 
 
-
 ### Mongoose.prototype.VirtualType()
-
-
-### Mongoose.prototype.get()
+Mongoose VirtualType类的构造函数。
 
 ### Mongoose.prototype.mquery
+mquery 查询构造器
 
 ### Mongoose.prototype.now()
 Mongoose使用此函数来设置时间戳时获取当前时间。你可以使用像Sinon这样的工具来验证这个功能。
+```javascript
+mongoose.now()//2019-02-16T07:44:50.212Z
+```
 
 ### Mongoose.prototype.plugin()
-
+声明在所有Schema上执行的全局插件。相当于在你创建的每个Schema上调用.plugin(fn)。
+参数：
+- fn: 回调函数
+- options: 可选项
 ### Mongoose.prototype.pluralize()
-
+### Mongoose.prototype.get()
 ### Mongoose.prototype.set()
-
 ### Mongoose.prototype.startSession()
 
 ### Mongoose.prototype.version
