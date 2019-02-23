@@ -218,9 +218,9 @@ Mixed SchemaType，混合类型，可以是任何类型。
 const schema = new Schema({ arbitrary: mongoose.Mixed });
 ```
 ### Mongoose.prototype.Promise
+Mongoose Promise 构造函数
 ### Mongoose.prototype.PromiseProvider()
-
-
+mongoose promises 存储层
 ### Mongoose.prototype.VirtualType()
 Mongoose VirtualType类的构造函数。
 
@@ -239,6 +239,12 @@ mongoose.now()//2019-02-16T07:44:50.212Z
 - fn: 回调函数
 - options: 可选项
 ### Mongoose.prototype.pluralize()
+参数可为 `function/null`，传入一个函数时可以重写mongoose的集合名变复数逻辑（自动在用户定义的集合名后加s），如下生成的集合名为 datas。
+```javascript
+mongoose.model('data', dataSchema);
+```
+版本5.x以上，可以使用 `mongoose.pluralize(null)` 来禁用变复数逻辑。
+
 ### Mongoose.prototype.get()
 ### Mongoose.prototype.set()
 ### Mongoose.prototype.startSession()
