@@ -244,8 +244,7 @@ mongoose.now()//2019-02-16T07:44:50.212Z
 mongoose.model('data', dataSchema);
 ```
 版本5.x以上，可以使用 `mongoose.pluralize(null)` 来禁用变复数逻辑。
-关于变复数问题：
-https://stackoverflow.com/questions/10547118/why-does-mongoose-always-add-an-s-to-the-end-of-my-collection-name
+[关于变复数问题](https://stackoverflow.com/questions/10547118/why-does-mongoose-always-add-an-s-to-the-end-of-my-collection-name)
 ### Mongoose.prototype.get()
 ### Mongoose.prototype.set()
 ### Mongoose.prototype.startSession()
