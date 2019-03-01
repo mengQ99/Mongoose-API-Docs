@@ -245,8 +245,32 @@ mongoose.model('data', dataSchema);
 ```
 版本5.x以上，可以使用 `mongoose.pluralize(null)` 来禁用变复数逻辑。
 [关于变复数问题](https://stackoverflow.com/questions/10547118/why-does-mongoose-always-add-an-s-to-the-end-of-my-collection-name)
-### Mongoose.prototype.get()
+
 ### Mongoose.prototype.set()
+设置mongoose的选项
+```javascript
+mongoose.set('debug', true)
+```
+可支持选项：
+- debug: 将mongoose发送到MongoDB的操作打印到控制台。
+![image](https://raw.githubusercontent.com/mengQ99/Mongoose-API-Docs/master/images/mongoose-1.png)
+- bufferCommands: 启用/禁用所有连接和模型的mongoose缓冲机制。
+- useCreateIndex: 默认false。设置为true以使Mongoose的默认索引构建使用createIndex()而不是ensureIndex()来避免MongoDB驱动程序的弃用警告。
+- useFindAndModify: 默认true。设置为false以使findOneAndUpdate()和findOneAndRemove()使用本机findOneAndUpdate()而不是findAndModify()。
+- useNewUrlParser: 默认false。设置为true以使所有连接默认设置为useNewUrlParser选项。
+- cloneSchemas: 默认false。设置为true以使在编译为模型(model)之前克隆(deep copy)所有的模式(schema)。
+- applyPluginsToDiscriminators: 默认 false。设置为true则将全局插件应用于鉴别器（Discriminator）模式。通常这是不必要的，因为插件应用于基本模式，并且鉴别器从基础模式复制所有中间件、方法、静态和属性。
+- objectIdGetter: 默认true。Mongoose会为MongoDB ObjectId添加一个名为_id的getter，为了方便起见，它会返回this。将其设置为false可以删除getter。
+- runValidators: 默认false。设置为true则将为所有验证程序启用更新验证程序。
+- toObject
+- toJSON
+- strict: 默认true。可能为false/true/'throw'。设置模式为默认严格模式。
+- selectPopulatedPaths
+### Mongoose.prototype.get()
+获取mongoose的选项设置
+```javascript
+mongoose.get('debug') //true
+```
 ### Mongoose.prototype.startSession()
 
 ### Mongoose.prototype.version
