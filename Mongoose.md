@@ -272,7 +272,9 @@ mongoose.set('debug', true)
 mongoose.get('debug') //true
 ```
 ### Mongoose.prototype.startSession()
+需要MongoDB >= 3.6.0。启动一个MongoDB会话以使操作保持因果一致性、可重写（Retryable Writes）和事务性之类。
 
+调用mongoose.startSession()等于调用mongoose.connection.startSession()。会话的作用域是一个连接，所以调用mongoose.startSession()会在mongoose默认连接上启动一个会话。
 ### Mongoose.prototype.version
 Mongoose 版本。
 
